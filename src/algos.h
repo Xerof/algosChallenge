@@ -35,9 +35,7 @@ namespace algos {
         // but the interdace of the object has to be only the sort method
       }
     };
-  };
-
-
+ 
   class MergeSort {
   public:
 
