@@ -28,14 +28,13 @@ namespace algos {
         // but the interdace of the object has to be only the sort method
 
         Iterator i,j;
-        for(i = first ;  i != last; i++)
-        {
-            std::cout<< *i << std::endl;
-            for(j = first; j < i; j++) {
-                if (*i < *j) {
-                    swap(i, j);
-                }
+        for(i = first ;  i != last; i++) {
+          std::cout<< *i << std::endl;
+          for(j = first; j < i; j++) {
+            if(*i < *j) {
+              swap(i, j);
             }
+          }
         }
         // For now the function will only be printing the data
         // This is just to show you the way the iterator works
