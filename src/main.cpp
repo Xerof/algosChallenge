@@ -21,16 +21,16 @@ std::vector<float> readVectorFromFile(const char* fileName) {
   std::vector<float> myData;
   float value;
 
-  if (fileName == NULL)
-      return myData;
+  if(fileName == NULL)
+    return myData;
 
   std::ifstream file (fileName);
 
-  if (file.is_open()) {
-      while (file >> value)
-          myData.push_back(value);
+  if(file.is_open()) {
+    while (file >> value)
+      myData.push_back(value);
   } else {
-      std::cout << "Can't open the file " << fileName << std::endl;
+    std::cout << "Can't open the file " << fileName << std::endl;
   }
 
   return myData;
