@@ -2,29 +2,112 @@
 #include <cstdlib>
 #include <fstream>
 #include <string.h>
+#include <unistd.h>
+#include <stdint.h>
+#include <time.h>
+#include <iomanip>
+
+#define INPUT_FILE 1
+#define BUBBLESORT 2
+#define MERGESORT 4
+#define PRINTINPUT 8
+
+static uint8_t flag;
 
 std::vector<float> readVectorFromFile(const char* fileName);
+void usage()
+{
+	 std::cout << "Usage: -b: Bubble sort -m: Merge sort "		           
+		       << "-f: <file_name> -h: help" << std::endl;
+}
 
+void setflags(int argc, char **argv, char *filename)
+{
+	int c = 0;
+  	opterr = 0;
+    while((c = getopt(argc, argv, "bdhmf:")) != -1)
+	  switch(c)
+	  {
+		  case 'b':
+          {
+		      flag |= BUBBLESORT;
+	      }break;
+		  
+		  case 'd':
+          {
+		      flag |= PRINTINPUT;
+	      }break;
+
+	  
+	      case 'f':
+	      {
+		      flag |= INPUT_FILE;
+			  memcpy(filename, optarg, strlen(optarg) + 1);
+	      }break;
+
+	      case 'h':
+	      {
+			  usage();
+	      }break;
+
+	      case 'm':
+	      {
+		      flag |= MERGESORT;
+	      }break;
+
+		  case '?':
+		  {
+			  usage();
+		  }break;
+		  
+	      default:
+	  	    abort();
+      }
+
+}
 
 int main(int argc, char** argv) {
 
   std::vector<float> myData;
+  uint8_t bubbleFlag = 0;
+  uint8_t mergeFlag = 0;
+  uint8_t fileFlag = 0;
+  char filename[100];
 
-  // Fill the data
-  if(argc >= 2) {
-    myData = readVectorFromFile(argv[2]);
-        if (0 == strncmp(argv[1],"merge",5)) {
-            algos::MergeSort al;
-            al.sort(myData.begin(), myData.end());
-            al.show(myData.begin(), myData.end());
-        } else {
-            algos::BubbleSort al;
-            al.sort(myData.begin(), myData.end());
-            al.show(myData.begin(), myData.end());
-        }
-    } else {
-		std::cout << "usage ./main <filename>" << std::endl;
-    }
+  if(argc < 2 )
+  {
+	  usage();
+	  return EXIT_SUCCESS;
+  }
+
+  setflags(argc, argv, filename);
+  if(flag & INPUT_FILE) {
+	  std::cout <<"File: "<< filename << std::endl;
+	  myData = readVectorFromFile(filename);
+	  if(flag & PRINTINPUT) {
+	      std::cout << "Input: "<<std::endl;
+	      for(std::vector<float>::const_iterator it = myData.begin();
+			     it != myData.end(); ++it)
+		      std::cout << *it << std::endl;
+      }
+  
+	  if(flag & BUBBLESORT)
+	  {
+		  std::cout << "Bubble Sort" << std::endl;
+		  algos::MergeSort al;
+          al.sort(myData.begin(), myData.end());
+          al.show(myData.begin(), myData.end());
+	  }
+
+	  if(flag & MERGESORT)
+	  {
+		  std::cout << "Merge Sort" << std::endl;
+		  algos::BubbleSort al;
+          al.sort(myData.begin(), myData.end());
+          al.show(myData.begin(), myData.end());
+	  }
+
+  }
 
     return EXIT_SUCCESS;
 }

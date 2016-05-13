@@ -20,7 +20,6 @@ namespace algos {
 
    template<typename Iterator>
        void show (Iterator first, Iterator last) {
-        std::cout << "BubbleSort::"<< __func__ << std::endl;
         for(; first!=last; first++) {
             std::cout << *first
                     << " "
@@ -33,7 +32,6 @@ namespace algos {
     template<typename Iterator>
       void applySort(Iterator first,
                      Iterator last) {
-        std::cout << "BubbleSort::"<< __func__ << std::endl;
         // Here goes the code for merge sort declare as manym methods as you want
         // but the interdace of the object has to be only the sort method
 
