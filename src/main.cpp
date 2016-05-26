@@ -94,10 +94,7 @@ int main(int argc, char** argv) {
                 std::cout << *it << std::endl;
         }
 
-<<<<<<< HEAD
         int start_s = clock();
-=======
->>>>>>> 2cbe9256002b49ffb67f2ca9546fc890fc7e00b0
         if(flag & BUBBLESORT)
         {
             std::cout << "Bubble Sort" << std::endl;
@@ -121,10 +118,7 @@ int main(int argc, char** argv) {
             al.sort(myData.begin(), myData.end());
             al.show(myData.begin(), myData.end());
         }
-<<<<<<< HEAD
         std::cout<<"time: " << (clock() - start_s)/double(CLOCKS_PER_SEC)*1000 <<std::endl;
-=======
->>>>>>> 2cbe9256002b49ffb67f2ca9546fc890fc7e00b0
     }
 
     return EXIT_SUCCESS;
