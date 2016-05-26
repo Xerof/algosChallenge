@@ -135,8 +135,8 @@ namespace algos {
             for(; first!=last; first++) {
                 std::cout << *first
                         << " ";
-             }
-           }
+            }
+        }
       protected:
       template<typename Iterator>
         void applySort(Iterator first,
